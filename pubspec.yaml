@@ -1,0 +1,54 @@
+name: boat_m
+description: "Ein neues Flutter-Projekt."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.17.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^0.13.4
+  dio: ^4.0.0
+  shared_preferences: ^2.0.8
+  cached_network_image: ^3.0.0
+  provider: ^6.0.5
+  #flutter_map: ^0.13.0
+ # latlong: ^0.6.1
+  image_picker: ^0.8.4+4
+  path: ^1.8.2
+  sqflite: ^2.2.0+3
+  logger: ^2.2.0
+  flutter_riverpod: ^1.0.3
+  
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.1
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/logo-transparent-png.png
+    - assets/163236.jpg
+    - assets/50911.jpg
+    - assets/14674658.jpg
+    - assets/699955.jpg
+    - assets/1203808.jpg
+    - assets/1687242.jpg
+    - assets/12401798.jpg
+    - assets/7395353.jpg
+    
+
+  #fonts:
+   # - family: Schyler
+     # fonts:
+       # - asset: fonts/Schyler-Regular.ttf
+        #- asset: fonts/Schyler-Italic.ttf
+          #style: italic
+   # - family: Trajan Pro
+     # fonts:
+       # - asset: fonts/TrajanPro.ttf
+       # - asset: fonts/TrajanPro_Bold.ttf
+         # weight: 700
