@@ -36,7 +36,7 @@ class DatabaseRepository {
     return _database!;
   }
 
-  _initDatabase() async {
+  Future<Database> _initDatabase() async {
     String path = join(await getDatabasesPath(), _databaseName);
     return await openDatabase(
       path,
@@ -45,7 +45,7 @@ class DatabaseRepository {
     );
   }
 
-  Future _onCreate(Database db, int version) async {
+  Future<void> _onCreate(Database db, int version) async {
     await db.execute('''
       CREATE TABLE $table (
         $columnId INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -68,6 +68,49 @@ class DatabaseRepository {
       ''');
   }
 
-  // Weitere Methoden wie getAllBoote(), insertBoot(), updateBoot(), deleteBoot()
-  // wie zuvor
+  Future<void> insertData({
+    required String marke,
+    required String modell,
+    required String auswahl,
+    required String liegeplatz,
+    required int baujahrvon,
+    required int baujahrbis,
+    required double laengmin,
+    required double laengmax,
+    required double preisvon,
+    required double preisbis,
+    required String motorart,
+    required String kraftstoff,
+    required int leistungvon,
+    required int segelanzahl,
+    required double segelqm,
+  }) async {
+    final Database db = await database;
+    await db.insert(
+      table,
+      {
+        columnMarke: marke,
+        columnModell: modell,
+        columnAuswahl: auswahl,
+        columnLiegeplatz: liegeplatz,
+        columnBaujahrvon: baujahrvon,
+        columnBaujahrbis: baujahrbis,
+        columnLaengmin: laengmin,
+        columnLaengmax: laengmax,
+        columnPreisvon: preisvon,
+        columnPreisbis: preisbis,
+        columnMotorart: motorart,
+        columnKraftstoff: kraftstoff,
+        columnLeistungvon: leistungvon,
+        columnSegelanzahl: segelanzahl,
+        columnSegelqm: segelqm,
+      },
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
+  Future<List<Map<String, dynamic>>> getBoatData() async {
+    final Database db = await database;
+    return await db.query(table);
+  }
 }

@@ -1,7 +1,8 @@
-import 'package:boat_m/home/home_screen.dart';
-import 'package:boat_m/themes/custom_theme.dart';
+import 'package:boat_m/second_page/second_sccreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'home/home_screen.dart'; 
+import 'themes/custom_theme.dart'; 
 
 void main() {
   runApp(
@@ -19,13 +20,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: CustomTheme.getTheme(),
       home: const HomeScreen(),
+      routes: {
+        '/home': (context) => const HomeScreen(),
+        '/second': (context) => const SecondScreen(),
+      },
       debugShowCheckedModeBanner: false,
     );
   }
-}
-
-final appDataProvider = ChangeNotifierProvider((_) => AppData());
-
-class AppData extends ChangeNotifier {
-  // Hier kommen  App-Daten hin, die zwischen Widgets geteilt werden sollen
 }

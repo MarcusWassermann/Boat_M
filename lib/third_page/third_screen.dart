@@ -1,8 +1,9 @@
+import 'package:flutter/material.dart';
+import 'dart:math';
+import 'package:boat_m/themes/background_colors.dart';
 import 'package:boat_m/third_page/widgets/advertisemen_list.dart';
 import 'package:boat_m/third_page/widgets/top_box_contents.dart';
 import 'package:boat_m/widgets/custom_navigations_bar.dart';
-import 'package:flutter/material.dart';
-
 
 class ThirdScreen extends StatefulWidget {
   const ThirdScreen({super.key, required this.category});
@@ -15,36 +16,55 @@ class ThirdScreen extends StatefulWidget {
 }
 
 class _ThirdScreenState extends State<ThirdScreen> {
+  late List<Color> blueShades;
+
+  @override
+  void initState() {
+    super.initState();
+    blueShades = BackgroundColors.blueShades.toList();
+    blueShades.shuffle(Random());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 33, 150, 243),
-      appBar: AppBar(
-        backgroundColor: const Color.fromARGB(0, 0, 0, 0),
-        elevation: 0,
-        toolbarHeight: 80,
-        centerTitle: true,
-        title: SizedBox(
-          width: MediaQuery.of(context).size.width / 2,
-          child: Image.asset('assets/logo-transparent-png.png'),
+      backgroundColor: Colors.transparent,
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: SweepGradient(
+            center: Alignment.center,
+            startAngle: 0,
+            endAngle: 2 * pi,
+            colors: blueShades,
+          ),
         ),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+        child: Column(
+          children: [
+            AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              leading: IconButton(
+                icon: const Icon(Icons.arrow_back),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ),
+            Expanded(
+              child: Column(
+                children: [
+                  TopBoxContents(),
+                  const SizedBox(height: 20),
+                  const AdvertisementList(),
+                ],
+              ),
+            ),
+            CustomBottomNavigationBar(
+              selectedIndex: 0,
+              onItemTapped: (index) {},
+            ),
+          ],
         ),
-      ),
-      body: Column(
-        children: [
-          TopBoxContents(),
-          const SizedBox(height: 20),
-          const AdvertisementList(),
-        ],
-      ),
-      bottomNavigationBar: CustomBottomNavigationBar(
-        selectedIndex: 0,
-        onItemTapped: (index) {},
       ),
     );
   }

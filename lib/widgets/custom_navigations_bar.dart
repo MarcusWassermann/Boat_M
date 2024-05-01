@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:boat_m/themes/background_colors.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget {
   final int selectedIndex;
@@ -10,8 +13,15 @@ class CustomBottomNavigationBar extends StatelessWidget {
     required this.onItemTapped,
   });
 
+  Color _getRandomColor(List<Color> colors) {
+    final random = Random();
+    return colors[random.nextInt(colors.length)];
+  }
+
   @override
   Widget build(BuildContext context) {
+    final colors = BackgroundColors.blueShades;
+
     return BottomNavigationBar(
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
@@ -30,18 +40,8 @@ class CustomBottomNavigationBar extends StatelessWidget {
         ),
       ],
       currentIndex: selectedIndex,
-      onTap: (index) {
-        if (index == 0) {
-          // Wenn auf 'Home' geklickt wird, navigiere zum Home-Screen
-          Navigator.pushNamed(context, '/home');
-        } else if (index == 1) {
-          // Wenn auf 'Search' geklickt wird, navigiere zum Second-Screen
-          Navigator.pushNamed(context, '/second');
-        }
-        // Aufruf der übergebenen Funktion
-        onItemTapped(index);
-      },
-      backgroundColor: Colors.blue,
+      onTap: onItemTapped, // Die übergebene Funktion aufrufen
+      backgroundColor: _getRandomColor(colors),
       selectedItemColor: Colors.white,
       unselectedItemColor: Colors.white.withOpacity(0.6),
     );

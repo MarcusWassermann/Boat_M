@@ -1,3 +1,4 @@
+// ad_text_input.dart
 import 'package:flutter/material.dart';
 
 class AdTextInput extends StatelessWidget {
@@ -12,19 +13,17 @@ class AdTextInput extends StatelessWidget {
         border: Border.all(color: Colors.blue, width: 2.0),
         borderRadius: BorderRadius.circular(4.0),
       ),
-      width: double.infinity, 
+      width: double.infinity,
       child: TextField(
         controller: controller,
         maxLines: 5,
-        style: const TextStyle(fontSize: 11.0), 
+        style: const TextStyle(fontSize: 11.0),
         decoration: const InputDecoration(
           border: OutlineInputBorder(),
           hintText: 'Geben Sie hier Ihre Anzeigentext ein',
-          contentPadding: EdgeInsets.symmetric(
-              vertical: 6.0, horizontal: 10.0), 
+          contentPadding: EdgeInsets.symmetric(vertical: 6.0, horizontal: 10.0),
         ),
       ),
     );
   }
 }
-

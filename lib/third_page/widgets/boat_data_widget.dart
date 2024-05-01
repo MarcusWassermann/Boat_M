@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:boat_m/data/database_repository.dart';
+
 class BoatDataWidget extends StatefulWidget {
-  
   const BoatDataWidget({super.key});
 
   @override
@@ -9,59 +10,23 @@ class BoatDataWidget extends StatefulWidget {
 
 class _BoatDataWidgetState extends State<BoatDataWidget> {
   bool _isExpanded = false;
+  Map<String, dynamic>? _boatData;
 
-  /// Funktion zum Erstellen der Liste von Bootsdaten.
-  List<Widget> _buildBoatData() {
-    return [
-      const ListTile(
-        title: Text(
-          'Brand',
-          style: TextStyle(fontSize: 16),
-        ),
-      ),
-      const ListTile(
-        title: Text(
-          'Model',
-          style: TextStyle(fontSize: 16),
-        ),
-      ),
-      const ListTile(
-        title: Text(
-          'Location',
-          style: TextStyle(fontSize: 16),
-        ),
-      ),
-      const ListTile(
-        title: Text(
-          'Year',
-          style: TextStyle(fontSize: 16),
-        ),
-      ),
-      const ListTile(
-        title: Text(
-          'Engine Type',
-          style: TextStyle(fontSize: 16),
-        ),
-      ),
-      const ListTile(
-        title: Text(
-          'Fuel',
-          style: TextStyle(fontSize: 16),
-        ),
-      ),
-      const ListTile(
-        title: Text(
-          'Sail Count: ',
-          style: TextStyle(fontSize: 16),
-        ),
-      ),
-      const ListTile(
-        title: Text(
-          'Sail Area: ',
-          style: TextStyle(fontSize: 16),
-        ),
-      ),
-    ];
+  @override
+  void initState() {
+    super.initState();
+    _loadData(); // Lade die Daten, wenn das Widget erstellt wird
+  }
+
+  Future<void> _loadData() async {
+    final data = await DatabaseRepository.instance.getBoatData();
+    if (data.isNotEmpty) {
+      setState(() {
+        _boatData = data.first;
+        _isExpanded =
+            true; // Hier setzen wir _isExpanded auf true, wenn Daten geladen wurden
+      });
+    }
   }
 
   @override
@@ -72,7 +37,7 @@ class _BoatDataWidgetState extends State<BoatDataWidget> {
         expandedHeaderPadding: EdgeInsets.zero,
         expansionCallback: (int index, bool isExpanded) {
           setState(() {
-            _isExpanded = isExpanded;
+            _isExpanded = !_isExpanded;
           });
         },
         children: [
@@ -89,13 +54,34 @@ class _BoatDataWidgetState extends State<BoatDataWidget> {
                 contentPadding: EdgeInsets.only(left: 16),
               );
             },
-            body: Column(
-              children: _buildBoatData(),
-            ),
+            body: _boatData == null
+                ? const Center(child: CircularProgressIndicator())
+                : Column(
+                    children: [
+                      _buildDataRow('Brand', _boatData!['marke']),
+                      _buildDataRow('Model', _boatData!['modell']),
+                      _buildDataRow('Location', _boatData!['liegeplatz']),
+                      _buildDataRow(
+                          'Year', _boatData!['baujahrvon'].toString()),
+                      _buildDataRow('Engine Type', _boatData!['motorart']),
+                      _buildDataRow('Fuel', _boatData!['kraftstoff']),
+                      _buildDataRow(
+                          'Sail Count', _boatData!['segelanzahl'].toString()),
+                      _buildDataRow(
+                          'Sail Area', _boatData!['segelqm'].toString()),
+                    ],
+                  ),
             isExpanded: _isExpanded,
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildDataRow(String label, String value) {
+    return ListTile(
+      title: Text(label),
+      trailing: Text(value),
     );
   }
 }

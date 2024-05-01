@@ -1,4 +1,3 @@
-import 'package:boat_m/postad_page/widgets/provider_type_checkbox.dart';
 import 'package:flutter/material.dart';
 import 'package:boat_m/payment_page/payment_screen.dart';
 import 'package:boat_m/payment_page/models/payment_model.dart';
@@ -7,9 +6,9 @@ import 'package:boat_m/postad_page/widgets/boat_data_field.dart';
 import 'package:boat_m/postad_page/widgets/commercial_details_dialog.dart';
 import 'package:boat_m/postad_page/widgets/image_uploader.dart';
 import 'package:boat_m/postad_page/widgets/post_ad_button.dart';
+import 'package:boat_m/postad_page/widgets/provider_type_checkbox.dart';
 
 class PostAdScreen extends StatefulWidget {
-  
   // ignore: prefer_typing_uninitialized_variables
   final commercialAddressData;
 
@@ -40,8 +39,59 @@ class _PostAdScreenState extends State<PostAdScreen> {
       context: context,
       builder: (BuildContext context) {
         return CommercialDetailsDialog(
-          onSave: (companyName, companyLocation, companyStreet,
-              companyPhoneNumber, companyEmail) {},
+            onSave: (companyName, companyLocation, companyStreet,
+                companyPhoneNumber, companyEmail) {});
+      },
+    );
+  }
+
+  void _showPrivateDetailsDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Private Anbieterdetails'),
+          content: const SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                TextField(
+                  decoration: InputDecoration(
+                    labelText: 'Name',
+                  ),
+                ),
+                TextField(
+                  decoration: InputDecoration(
+                    labelText: 'E-Mail',
+                  ),
+                  keyboardType: TextInputType.emailAddress,
+                ),
+                TextField(
+                  decoration: InputDecoration(
+                    labelText: 'Telefonnummer (Optional)',
+                  ),
+                  keyboardType: TextInputType.phone,
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Abbrechen'),
+            ),
+            TextButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
+              ),
+              onPressed: () {
+                // Hier könnten Sie die Daten speichern oder verarbeiten
+                Navigator.of(context).pop();
+              },
+              child: const Text('Speichern'),
+            ),
+          ],
         );
       },
     );
@@ -64,11 +114,6 @@ class _PostAdScreenState extends State<PostAdScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                '',
-                style: TextStyle(fontSize: 18.0),
-              ),
-              const SizedBox(height: 10.0),
               AdTextInput(controller: _adTextController),
               const SizedBox(height: 20.0),
               const Text('Bootsdaten:', style: TextStyle(fontSize: 18.0)),
@@ -91,6 +136,9 @@ class _PostAdScreenState extends State<PostAdScreen> {
                   setState(() {
                     _isPrivate = value ?? false;
                     _isCommercial = !(value ?? false);
+                    if (_isPrivate) {
+                      _showPrivateDetailsDialog();
+                    }
                   });
                 },
               ),
@@ -99,8 +147,7 @@ class _PostAdScreenState extends State<PostAdScreen> {
               const SizedBox(height: 20.0),
               PostAdButton(
                 onPressed: () {
-                  String adText = _adTextController.text;
-                  _postAd(adText, context);
+                  _postAd(_adTextController.text, context);
                 },
               ),
             ],

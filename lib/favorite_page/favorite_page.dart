@@ -18,6 +18,7 @@ class FavoritesPage extends StatelessWidget {
             fit: BoxFit.contain,
           ),
         ),
+        iconTheme: const IconThemeData(color: Color.fromARGB(255, 12, 4, 4)),
       ),
       body: ListView.builder(
         itemCount: favoritenListe.length,
@@ -32,12 +33,14 @@ class FavoritesPage extends StatelessWidget {
           children: [
             IconButton(
               icon: const Icon(Icons.home),
+              color: Colors.white, // Icon in Weiß
               onPressed: () {
                 // Aktion für die Home-Seite hier einfügen
               },
             ),
             IconButton(
               icon: const Icon(Icons.search),
+              color: Colors.white, // Icon in Weiß
               onPressed: () {
                 // Aktion für die Suchseite hier einfügen
               },

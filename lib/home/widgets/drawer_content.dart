@@ -18,23 +18,15 @@ class DrawerContent extends StatelessWidget {
           children: <Widget>[
             const DrawerHeader(
               decoration: BoxDecoration(
-                color: Color.fromARGB(255, 50, 150, 243),
+                color: Color.fromARGB(255, 13, 105, 192),
               ),
               child: Text(
                 'Menü',
                 style: TextStyle(
-                  color: Color.fromARGB(255, 7, 2, 2),
+                  color: Colors.white, // Weißer Text
                   fontSize: 24,
                 ),
               ),
-            ),
-            // Home
-            _buildListTile(
-              icon: Icons.home,
-              title: 'Home',
-              onTap: () {
-                // Navigieren zu HomeScreen
-              },
             ),
             // Suche
             _buildListTile(
@@ -137,7 +129,6 @@ class DrawerContent extends StatelessWidget {
     );
   }
 
-  /// Methode zum Erstellen eines ListTile-Widgets mit Icon, Titel und onTap-Handler.
   Widget _buildListTile({
     required IconData icon,
     required String title,
