@@ -1,4 +1,4 @@
-import 'package:boat_m/second_page/second_sccreen.dart';
+import 'package:boat_m/second_page/second_screen.dart';
 import 'package:flutter/material.dart';
 
 

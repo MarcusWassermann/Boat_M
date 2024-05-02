@@ -1,23 +1,20 @@
-// Datei: widgets/name_and_price.dart
+// name_and_price.dart
+// ignore_for_file: library_private_types_in_public_api
 
 import 'package:boat_m/contact_form_page/contact_form_screen.dart';
 import 'package:boat_m/fourth_page/fourth_screen.dart';
 import 'package:flutter/material.dart';
 
-
 class NameAndPrice extends StatefulWidget {
   final bool isCommercial;
-  final dynamic
-      commercialAddressData; // Typ des dynamischen Datenobjekts angeben
+  final dynamic commercialAddressData;
 
-  const NameAndPrice({
-    super.key,
+  const NameAndPrice({super.key, 
     required this.isCommercial,
     this.commercialAddressData,
   });
 
   @override
-  // ignore: library_private_types_in_public_api
   _NameAndPriceState createState() => _NameAndPriceState();
 }
 
@@ -40,7 +37,7 @@ class _NameAndPriceState extends State<NameAndPrice> {
           const Padding(
             padding: EdgeInsets.only(left: 10, top: 10),
             child: Text(
-              'Name',
+              'Name', // Änderung: Bootsnamen anzeigen
               style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
             ),
           ),
@@ -48,7 +45,7 @@ class _NameAndPriceState extends State<NameAndPrice> {
           const Padding(
             padding: EdgeInsets.only(left: 10, top: 10),
             child: Text(
-              'Price',
+              'Price', // Änderung: Preis anzeigen
               style: TextStyle(fontSize: 14),
             ),
           ),

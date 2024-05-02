@@ -1,12 +1,14 @@
-import 'package:boat_m/favorite_page/favorite_page.dart';
-import 'package:boat_m/login_page/login_ui.dart';
-import 'package:boat_m/registration_page/registration_screen.dart';
-import 'package:boat_m/second_page/second_sccreen.dart';
+import 'package:boat_m/login_page/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:boat_m/favorite_page/favorite_page.dart';
+import 'package:boat_m/registration_page/registration_screen.dart';
+import 'package:boat_m/second_page/second_screen.dart';
 
 /// Widget für den Inhalt des App-Drawers.
 class DrawerContent extends StatelessWidget {
-  const DrawerContent({super.key});
+  final List<int> favoritenListe;
+
+  const DrawerContent({super.key, required this.favoritenListe});
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +51,7 @@ class DrawerContent extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => LoginScreen(),
+                    builder: (context) => const LoginScreen(),
                   ),
                 );
               },
@@ -63,7 +65,7 @@ class DrawerContent extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) =>
-                        const FavoritesPage(favoritenListe: []),
+                        FavoritesPage(favoritenListe: favoritenListe),
                   ),
                 );
               },
@@ -76,7 +78,7 @@ class DrawerContent extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => RegistrationScreen(),
+                    builder: (context) => const RegistrationScreen(),
                   ),
                 );
               },
@@ -89,7 +91,7 @@ class DrawerContent extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => LoginScreen(),
+                    builder: (context) => const LoginScreen(),
                   ),
                 );
               },
@@ -118,7 +120,7 @@ class DrawerContent extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => LoginScreen(),
+                    builder: (context) => const LoginScreen(),
                   ),
                 );
               },

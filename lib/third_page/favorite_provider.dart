@@ -1,18 +1,17 @@
+// FavoriteProvider.dart
 import 'package:flutter/material.dart';
 
 class FavoriteProvider extends ChangeNotifier {
-  List<int> favorites = [];
+  final Set<int> _favoriteIds = {};
+
+  Set<int> get favoriteIds => _favoriteIds;
 
   void toggleFavorite(int id) {
-    if (favorites.contains(id)) {
-      favorites.remove(id);
+    if (_favoriteIds.contains(id)) {
+      _favoriteIds.remove(id);
     } else {
-      favorites.add(id);
+      _favoriteIds.add(id);
     }
     notifyListeners();
-  }
-
-  bool isFavorite(int id) {
-    return favorites.contains(id);
   }
 }

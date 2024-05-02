@@ -1,3 +1,6 @@
+// ignore_for_file: library_private_types_in_public_api
+
+import 'package:boat_m/postad_page/ad_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:boat_m/data/database_repository.dart';
 
@@ -5,7 +8,6 @@ class BoatDataFields extends StatefulWidget {
   const BoatDataFields({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _BoatDataFieldsState createState() => _BoatDataFieldsState();
 }
 
@@ -59,7 +61,7 @@ class _BoatDataFieldsState extends State<BoatDataFields> {
         _buildBoatDataField('Segel qm', _sailAreaController, 12.0),
         ElevatedButton(
           onPressed: () {
-            _saveData();
+            _saveData(context); // Hier _saveData mit dem BuildContext aufrufen
           },
           child: const Text('Daten speichern'),
         ),
@@ -67,7 +69,9 @@ class _BoatDataFieldsState extends State<BoatDataFields> {
     );
   }
 
-  Future<void> _saveData() async {
+  Future<void> _saveData(BuildContext context) async {
+    AdProvider adProvider =
+        AdProvider(); // Erstellen Sie eine Instanz des AdProviders
     await DatabaseRepository.instance.insertData(
       marke: _brandController.text,
       modell: _modelController.text,
@@ -85,6 +89,26 @@ class _BoatDataFieldsState extends State<BoatDataFields> {
       segelanzahl: int.tryParse(_sailCountController.text) ?? 0,
       segelqm: double.tryParse(_sailAreaController.text) ?? 0.0,
     );
+    // Fügen Sie die Daten zum AdProvider hinzu
+    adProvider.addAd(Ad(
+      id: '1', // Hier den entsprechenden Wert setzen
+      title: _boatNameController.text,
+      price: double.tryParse(_priceController.text) ?? 0.0,
+    ));
+
+    // Textfelder leeren
+    _boatNameController.clear();
+    _priceController.clear();
+    _brandController.clear();
+    _modelController.clear();
+    _yearController.clear();
+    _lengthController.clear();
+    _conditionController.clear();
+    _engineTypeController.clear();
+    _fuelController.clear();
+    _powerController.clear();
+    _sailCountController.clear();
+    _sailAreaController.clear();
   }
 
   Widget _buildBoatDataField(

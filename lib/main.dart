@@ -1,13 +1,21 @@
-import 'package:boat_m/second_page/second_sccreen.dart';
+import 'package:boat_m/ad_posting_page/ad_posting_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'home/home_screen.dart'; 
-import 'themes/custom_theme.dart'; 
+import 'package:provider/provider.dart';
+import 'package:boat_m/postad_page/ad_provider.dart';
+import 'package:boat_m/third_page/favorite_provider.dart';
+import 'package:boat_m/home/home_screen.dart';
+import 'package:boat_m/second_page/second_screen.dart';
+import 'package:boat_m/themes/custom_theme.dart';
 
 void main() {
   runApp(
-    const ProviderScope(
-      child: MyApp(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AdProvider()),
+        ChangeNotifierProvider(create: (_) => FavoriteProvider()),
+        ChangeNotifierProvider(create: (_) => AdPostingProvider()),
+      ],
+      child: const MyApp(),
     ),
   );
 }

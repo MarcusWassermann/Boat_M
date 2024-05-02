@@ -1,31 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:boat_m/third_page/favorite_provider.dart';
+import 'package:boat_m/third_page/widgets/main_container.dart';
 
-class FavoriteIcon extends StatefulWidget {
-  final void Function(bool isFavorite) onPressed;
-
-  const FavoriteIcon({super.key, required this.onPressed});
-
-  @override
-  // ignore: library_private_types_in_public_api
-  _FavoriteIconState createState() => _FavoriteIconState();
-}
-
-class _FavoriteIconState extends State<FavoriteIcon> {
-  bool isFavorite = false;
+class FavoritesPage extends StatelessWidget {
+  const FavoritesPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      icon: Icon(
-        isFavorite ? Icons.favorite : Icons.favorite_border,
-        color: isFavorite ? Colors.red : null,
+    final favoriteProvider = Provider.of<FavoriteProvider>(context);
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Favoriten'),
       ),
-      onPressed: () {
-        setState(() {
-          isFavorite = !isFavorite;
-        });
-        widget.onPressed(isFavorite);
-      },
+      body: ListView.builder(
+        itemCount: favoriteProvider.favoriteIds.length,
+        itemBuilder: (context, index) {
+          int id = favoriteProvider.favoriteIds.elementAt(index);
+          return MainContainerWidget(id: id);
+        },
+      ),
     );
   }
 }

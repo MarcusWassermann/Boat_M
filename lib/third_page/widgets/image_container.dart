@@ -1,10 +1,11 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 
 class ImageContainerWidget extends StatefulWidget {
   const ImageContainerWidget({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _ImageContainerWidgetState createState() => _ImageContainerWidgetState();
 }
 
@@ -42,8 +43,7 @@ class _ImageContainerWidgetState extends State<ImageContainerWidget> {
                           ..rotateY((_currentIndex == index) ? 0 : 3.141),
                         child: const AnimatedSwitcher(
                           duration: Duration(milliseconds: 800),
-                          child:
-                              Placeholder(), // Placeholder, um das Bild zu ersetzen
+                          child: Placeholder(),
                         ),
                       );
                     },
@@ -68,15 +68,11 @@ class _ImageContainerWidgetState extends State<ImageContainerWidget> {
                         setState(() {
                           isFavorite = !isFavorite;
                         });
-                        // Navigieren Sie zum Favoriten-Screen
-                        if (isFavorite) {
-                          Navigator.pushNamed(context, '/favorites');
-                        }
                       },
                       child: Icon(
                         isFavorite ? Icons.favorite : Icons.favorite_border,
                         color: isFavorite ? Colors.red : Colors.grey,
-                        size: 20, // Größe nach Bedarf
+                        size: 20,
                       ),
                     ),
                   ),

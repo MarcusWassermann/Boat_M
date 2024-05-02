@@ -5,7 +5,7 @@ import 'package:boat_m/payment_page/logic/payment_logic.dart';
 class PaymentScreen extends StatelessWidget {
   final PaymentModel paymentModel;
 
-  const PaymentScreen({super.key, required this.paymentModel});
+  const PaymentScreen({super.key,required this.paymentModel});
 
   @override
   Widget build(BuildContext context) {

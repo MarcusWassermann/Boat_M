@@ -36,7 +36,7 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),
-      drawer: const DrawerContent(),
+      drawer: const DrawerContent(favoritenListe: [],),
     );
   }
 }

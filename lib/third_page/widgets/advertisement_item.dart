@@ -3,7 +3,7 @@ import 'package:boat_m/third_page/Models/commercial_address_data.dart';
 import 'package:boat_m/third_page/widgets/boat_data_widget.dart';
 import 'package:boat_m/third_page/widgets/image_container.dart';
 import 'package:boat_m/third_page/widgets/name_price.dart';
-import 'package:boat_m/widgets/text_field.dart'; // Stellen Sie sicher, dass dieser Pfad korrekt ist
+import 'package:boat_m/third_page/widgets/text_field.dart'; // Stellen Sie sicher, dass dieser Pfad korrekt ist
 
 class AdvertisementItemWidget extends StatefulWidget {
   final String advertisement;

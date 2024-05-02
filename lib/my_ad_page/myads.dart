@@ -1,27 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:boat_m/widgets/custom_navigations_bar.dart';
 
 class MyAdsScreen extends StatelessWidget {
   final List<String> myAds;
+  final int _selectedIndex = 0;
 
   const MyAdsScreen({super.key, required this.myAds});
 
   @override
   Widget build(BuildContext context) {
+    final Color? bottomNavigationBarColor =
+        Theme.of(context).bottomNavigationBarTheme.backgroundColor;
+
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue,
-        title: const SizedBox.shrink(), // Leerer Titel
+        backgroundColor:
+            bottomNavigationBarColor, // Use the same color for the app bar
+        title: Image.asset(
+          'assets/logo-transparent-png.png',
+          fit: BoxFit.contain,
+          height: 40,
+        ),
+        centerTitle: true,
+        automaticallyImplyLeading: false,
       ),
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(top: kToolbarHeight),
-            child: Image.asset(
-              'assets/logo-transparent-png.png',
-              fit: BoxFit.contain,
-              height: 56, // Höhe des Logos
-            ),
-          ),
           Expanded(
             child: ListView.builder(
               itemCount: myAds.length,
@@ -37,32 +41,14 @@ class MyAdsScreen extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: BottomAppBar(
-        color: Colors.blue,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            IconButton(
-              icon: const Icon(
-                Icons.home,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                // Aktion für die Home-Seite hier einfügen
-              },
-            ),
-            IconButton(
-              icon: const Icon(
-                Icons.search,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                // Aktion für die Suchseite hier einfügen
-              },
-            ),
-          ],
-        ),
+      bottomNavigationBar: CustomBottomNavigationBar(
+        selectedIndex: _selectedIndex,
+        onItemTapped: _onItemTapped,
       ),
     );
+  }
+
+  void _onItemTapped(int index) {
+    // Aktionen basierend auf dem ausgewählten Index ausführen
   }
 }

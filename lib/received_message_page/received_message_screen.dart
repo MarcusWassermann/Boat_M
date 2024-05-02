@@ -14,7 +14,7 @@ class ReceivedMessagesPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
-        title: null, // Text in der AppBar entfernen
+        title: null, 
       ),
       body: Column(
         children: [

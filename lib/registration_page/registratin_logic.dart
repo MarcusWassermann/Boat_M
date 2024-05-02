@@ -1,7 +1,8 @@
-import 'package:boat_m/postad_page/postad_screen.dart';
+// registration_logic.dart
 import 'package:flutter/material.dart';
+import 'package:boat_m/postad_page/postad_screen.dart';
 
-class RegistrationScreenLogic {
+class RegistrationLogic {
   static Future<void> register(
       BuildContext context,
       TextEditingController emailController,
@@ -12,7 +13,6 @@ class RegistrationScreenLogic {
     String confirmedPassword = confirmPasswordController.text.trim();
 
     if (email.isEmpty || password.isEmpty || confirmedPassword.isEmpty) {
-      // Fehlermeldung anzeigen, wenn E-Mail, Passwort oder Passwortwiederholung fehlen
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text(
@@ -20,12 +20,10 @@ class RegistrationScreenLogic {
         ),
       );
     } else if (password != confirmedPassword) {
-      // Fehlermeldung anzeigen, wenn das Passwort und die Passwortwiederholung nicht übereinstimmen
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Die Passwörter stimmen nicht überein')),
       );
     } else {
-      // Registrierung erfolgreich
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Registrierung erfolgreich: $email')),
       );
